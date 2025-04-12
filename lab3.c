@@ -6,7 +6,7 @@
 
 bool break = false;
 
-void dummy_func()
+void dummy_func(void *arg)
 {
 	char[200] input;
 	while(fgets(input, 200, stdin))
@@ -15,6 +15,10 @@ void dummy_func()
 		if(strcmp(input, "err"))
 		{
 			break = true;
+			while(1)
+			{
+
+			}
 		}
 		pthread_mutex_unlock(&lock);
 	}
@@ -47,6 +51,11 @@ int periodical_detector(void *arg)
 
 int main()
 {
+	pthread_t dummy_func_thread;
+	pthread_t detect;
 
+
+	pthread_create(&dummy_func_thread, NULL, &dummy_func, NULL);
+	pthread_create(&detect, NULL, &periodical_detector, NULL);
 
 }
